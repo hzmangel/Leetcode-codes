@@ -22,6 +22,13 @@ class Solution(object):
             for i in range(currRowNum/2):
                 data.append(self.data[currRowNum-1][i-1]+self.data[currRowNum-1][i])
             
-            data = data.extend(data.reverse())
-            return data
+            rslt = data
+            data.reverse()
+            
+            if currRownum % 2 == 0:
+                rslt.extend(data)
+            else:
+                rslt.extend(data[1:])
+
+            return rslt
         

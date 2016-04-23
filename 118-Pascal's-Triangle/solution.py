@@ -15,13 +15,13 @@ class Solution(object):
     def __gen_next_line(self, currRowNum):
         if currRowNum == 0:
             return [1]
-        else if currRowNum == 1:
+        elif currRowNum == 1:
             return [1,1]        
         else:
-            data = []
-            for i in range(currRowNum-1):
+            data = [1]
+            for i in range(currRowNum/2):
                 data.append(self.data[currRowNum-1][i-1]+self.data[currRowNum-1][i])
             
-            data.append(1)
+            data = data.extend(data.reverse())
             return data
         

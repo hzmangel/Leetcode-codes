@@ -8,8 +8,13 @@ class Solution(object):
         return self.splitSearch(nums, target, 0, len(nums))
 
     def splitSearch(self, nums, target, start_pos, end_pos):
-        if start_pos >= end_pos or len(nums) == 1:
-            return [-1, -1]
+        #print nums, start_pos, end_pos, end_pos - start_pos
+
+        if (start_pos >= end_pos) or ((end_pos - start_pos) == 1):
+            if nums[0] == target:
+                return [0, 0]
+            else:
+                return [-1, -1]
 
         if len(nums) == 2:
             if nums[0] > target or nums[1] < target:
@@ -30,7 +35,7 @@ class Solution(object):
 
         if mid_val == target:
             low_idx = start_pos
-            high_idx = end_pos
+            high_idx = end_pos-1
 
             for i in xrange(mid_idx-1, start_pos-1, -1):
                 if nums[i] < target:
@@ -45,6 +50,6 @@ class Solution(object):
             return [low_idx, high_idx]
 
         elif mid_val < target:
-            self.splitSearch(nums, target, mid_idx, end_pos)
+            return self.splitSearch(nums, target, mid_idx, end_pos)
         elif mid_val > target:
-            self.splitSearch(nums, target, start_pos, mid_idx)
+            return self.splitSearch(nums, target, start_pos, mid_idx)

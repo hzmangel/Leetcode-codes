@@ -5,51 +5,43 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        return self.splitSearch(nums, target, 0, len(nums))
+        start_idx = 0
+        end_idx = len(nums)
+        rslt = None
 
-    def splitSearch(self, nums, target, start_pos, end_pos):
-        #print nums, start_pos, end_pos, end_pos - start_pos
+        while True:
+            mid_idx = (start_idx + end_idx) / 2
+            mid_val = nums[mid_idx]
 
-        if (start_pos >= end_pos) or ((end_pos - start_pos) == 1):
-            if nums[0] == target:
-                return [0, 0]
-            else:
-                return [-1, -1]
+            if mid_val == target:
+                low_idx = start_idx
+                high_idx = end_idx-1
 
-        if len(nums) == 2:
-            if nums[0] > target or nums[1] < target:
-                return [-1, -1]
-            else:
-                if nums[0] == target:
-                    if nums[1] == target:
-                        return [0, 1]
-                    else:
-                        return [0, 0]
-                elif nums[1] == target:
-                    return [1, 1]
+                for i in xrange(mid_idx-1, start_idx-1, -1):
+                    if nums[i] < target:
+                        low_idx = i+1
+                        break
+
+                for i in xrange(mid_idx, end_idx):
+                    if nums[i] > target:
+                        high_idx = i-1
+                        break
+
+                rslt = [low_idx, high_idx]
+                break
+
+            elif mid_val < target:
+                start_idx = mid_idx
+
+            elif mid_val > target:
+                end_idx = mid_idx
+
+            if ((end_idx - start_idx) == 1) or (start_idx >= end_idx):
+                if nums[start_idx] == target:
+                    rslt = [start_idx, end_idx-1]
+                    break
                 else:
-                    return [-1, -1]
-
-        mid_idx = (start_pos + end_pos) / 2
-        mid_val = nums[mid_idx]
-
-        if mid_val == target:
-            low_idx = start_pos
-            high_idx = end_pos-1
-
-            for i in xrange(mid_idx-1, start_pos-1, -1):
-                if nums[i] < target:
-                    low_idx = i+1
+                    rslt = [-1, -1]
                     break
 
-            for i in xrange(mid_idx, end_pos):
-                if nums[i] > target:
-                    high_idx = i-1
-                    break
-
-            return [low_idx, high_idx]
-
-        elif mid_val < target:
-            return self.splitSearch(nums, target, mid_idx, end_pos)
-        elif mid_val > target:
-            return self.splitSearch(nums, target, start_pos, mid_idx)
+        return rslt

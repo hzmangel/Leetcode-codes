@@ -23,20 +23,24 @@ class Solution(object):
             if(idx >= 1) and (idx + 1 < str_len) and (s[idx - 1] == s[idx + 1]):
                 i = 1
                 while (idx >= i and idx + i < str_len and s[idx - i] == s[idx + i]):
-                    if 2 * i + 1 > max_len:
-                        max_len = 2 * i + 1
-                        rslt = s[idx - i:idx + i + 1]
-
                     i += 1
+
+                i -= 1
+                if 2 * i + 1 > max_len:
+                    max_len = 2 * i + 1
+                    rslt = s[idx - i:idx + i + 1]
+
 
             if(idx + 1 < str_len) and (s[idx] == s[idx + 1]):
                 i = 0
                 while (idx >= i and idx + i + 1 < str_len and s[idx - i] == s[idx + 1 + i]):
-                    if 2 * (i+1) > max_len:
-                        max_len = 2 * (i + 1)
-                        rslt = s[idx - i:idx + 1 + i + 1]
-
                     i += 1
+
+                i -= 1
+                if 2 * (i+1) > max_len:
+                    max_len = 2 * (i + 1)
+                    rslt = s[idx - i:idx + 1 + i + 1]
+
 
         return rslt
 

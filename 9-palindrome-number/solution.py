@@ -11,13 +11,10 @@ class Solution(object):
         if x < 0:
             return False
 
-        if x == 0:
+        if x < 10:
             return True
 
         num_len = int(math.log10(x)) + 1
-        if num_len == 1:
-            return True
-
         l_idx = num_len
         r_idx = 0
 

@@ -5,34 +5,20 @@ int romanToInt(char* s) {
     char *p = s;
     int result = 0;
 
-    int prev_val = 1000;
+    int prev_val = 1000; // M
     int curr_val = 0;
 
-    while(*p != 0) {
-        switch(*p) {
-            case 'I':
-                curr_val = 1;
-                break;
-            case 'V':
-                curr_val = 5;
-                break;
-            case 'X':
-                curr_val = 10;
-                break;
-            case 'L':
-                curr_val = 50;
-                break;
-            case 'C':
-                curr_val = 100;
-                break;
-            case 'D':
-                curr_val = 500;
-                break;
-            case 'M':
-                curr_val = 1000;
-                break;
-        }
+    int nums[26];
+    nums['I' - 'A'] = 1;
+    nums['V' - 'A'] = 5;
+    nums['X' - 'A'] = 10;
+    nums['L' - 'A'] = 50;
+    nums['C' - 'A'] = 100;
+    nums['D' - 'A'] = 500;
+    nums['M' - 'A'] = 1000;
 
+    while(*p != 0) {
+        curr_val = nums[*p - 'A'];
         result += curr_val > prev_val ? (curr_val - (prev_val << 1)) : curr_val;
         prev_val = curr_val;
         p++;

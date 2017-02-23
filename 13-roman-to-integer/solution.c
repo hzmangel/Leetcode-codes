@@ -48,10 +48,9 @@ int romanToInt(char* s) {
     while(*p != 0) {
         curr_val = romanChToInt(*p);
         if (curr_val > prev_val) {
-            result += (curr_val - prev_val * 2);
-        } else {
-            result += curr_val;
+            result -= prev_val * 2;
         }
+        result += curr_val;
         prev_val = curr_val;
         p++;
     }
@@ -60,13 +59,13 @@ int romanToInt(char* s) {
 }
 
 int main() {
-    //printf("%d\n", romanToInt("X") == 10);
-    //printf("%d\n", romanToInt("XIV") == 14);
-    //printf("%d\n", romanToInt("VIII") == 8);
-    //printf("%d\n", romanToInt("XCIX") == 99);
-    //printf("%d\n", romanToInt("XLV") == 45);
-    //printf("%d\n", romanToInt("MCMXCVI") == 1996);
-    //printf("%d\n", romanToInt("MDCCCLXXXIV"));
+    printf("%d\n", romanToInt("X") == 10);
+    printf("%d\n", romanToInt("XIV") == 14);
+    printf("%d\n", romanToInt("VIII") == 8);
+    printf("%d\n", romanToInt("XCIX") == 99);
+    printf("%d\n", romanToInt("XLV") == 45);
+    printf("%d\n", romanToInt("MCMXCVI") == 1996);
+    printf("%d\n", romanToInt("MDCCCLXXXIV"));
     for (long i = 1; i < 10000000; i++) {
         romanToInt("MCMXCVI");
     }

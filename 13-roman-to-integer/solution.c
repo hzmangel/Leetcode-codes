@@ -1,19 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-int romanChToInt(char c) {
-    switch(c) {
-        case 'I': return 1;
-        case 'V': return 5;
-        case 'X': return 10;
-        case 'L': return 50;
-        case 'C': return 100;
-        case 'D': return 500;
-        case 'M': return 1000;
-        default:  return 0;
-    }
-}
-
 int romanToInt(char* s) {
     char *p = s;
     int result = 0;
@@ -22,7 +9,30 @@ int romanToInt(char* s) {
     int curr_val = 0;
 
     while(*p != 0) {
-        curr_val = romanChToInt(*p);
+        switch(*p) {
+            case 'I':
+                curr_val = 1;
+                break;
+            case 'V':
+                curr_val = 5;
+                break;
+            case 'X':
+                curr_val = 10;
+                break;
+            case 'L':
+                curr_val = 50;
+                break;
+            case 'C':
+                curr_val = 100;
+                break;
+            case 'D':
+                curr_val = 500;
+                break;
+            case 'M':
+                curr_val = 1000;
+                break;
+        }
+
         result += curr_val > prev_val ? (curr_val - (prev_val << 1)) : curr_val;
         prev_val = curr_val;
         p++;

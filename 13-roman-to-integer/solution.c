@@ -41,35 +41,49 @@ int romanChToInt(char c) {
 int romanToInt(char* s) {
     char *p = s;
     int result = 0;
+    int p_val = romanChToInt(*p);
 
     while (*p != 0) {
-        int p_val = romanChToInt(*p);
-        if ((p_val == 1 || p_val == 5 || p_val == 10 || p_val == 100) && *(p+1)) {
+        if (p_val <= 100 && *(p+1)) {
             // Check next character to determine whether require minus
             int next_p_val = romanChToInt(*(p+1));
+
             if (p_val < next_p_val) {
                 result += (next_p_val - p_val);
                 p++;
             } else {
-                result += p_val;
+                if (next_p_val <= 100) {
+                    result += p_val;
+                    p_val = next_p_val;
+                    p++;
+                    continue;
+                } else {
+                    result += (p_val + next_p_val);
+                    p++;
+                }
             }
         } else {
             result += p_val;
         }
 
         p++;
+        p_val = romanChToInt(*p);
     }
 
     return result;
 }
 
 int main() {
-    printf("%d\n", romanToInt("X") == 10);
-    printf("%d\n", romanToInt("XIV") == 14);
-    printf("%d\n", romanToInt("VIII") == 8);
-    printf("%d\n", romanToInt("XCIX") == 99);
-    printf("%d\n", romanToInt("XLV") == 45);
-    printf("%d\n", romanToInt("MCMXCVI") == 1996);
+    //printf("%d\n", romanToInt("X") == 10);
+    //printf("%d\n", romanToInt("XIV") == 14);
+    //printf("%d\n", romanToInt("VIII") == 8);
+    //printf("%d\n", romanToInt("XCIX") == 99);
+    //printf("%d\n", romanToInt("XLV") == 45);
+    //printf("%d\n", romanToInt("MCMXCVI") == 1996);
+    //printf("%d\n", romanToInt("MDCCCLXXXIV"));
+    for (long i = 1; i < 10000000; i++) {
+        romanToInt("MCMXCVI");
+    }
     return 0;
 }
 

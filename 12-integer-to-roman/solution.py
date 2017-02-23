@@ -11,26 +11,26 @@ class Solution(object):
             (1, ('I', 1), ('V', 5), ('X', 10)),
         )
 
-        rslt = []
+        rslt = ''
         for idx, level in enumerate(roman_num_table):
             cnt = int(num / level[0])
             if cnt == 0:
                 continue
 
             if cnt == 5:
-                rslt.append('{}'.format(level[2][0]))
+                rslt = '{}{}'.format(rslt, level[2][0])
             elif cnt == 4:
-                rslt.append('{}{}'.format(level[1][0], level[2][0]))
+                rslt = '{}{}{}'.format(rslt, level[1][0], level[2][0])
             elif cnt == 9:
-                rslt.append('{}{}'.format(level[1][0], level[3][0]))
+                rslt = '{}{}{}'.format(rslt, level[1][0], level[3][0])
             elif cnt < 4:
-                rslt.append(('{0}'*cnt).format(level[1][0]))
+                rslt = '{}{}'.format(rslt, ('{0}' * cnt).format(level[1][0]))
             elif cnt > 5:
-                rslt.append(('{0}' + '{1}'*(cnt-5)).format(level[2][0], level[1][0]))
+                rslt = '{}{}'.format(rslt, ('{0}' + '{1}' * (cnt - 5)).format(level[2][0], level[1][0]))
 
             num = num % level[0]
 
-        return ''.join(rslt)
+        return rslt
 
 
 foo = Solution()

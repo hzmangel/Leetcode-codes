@@ -41,33 +41,19 @@ int romanChToInt(char c) {
 int romanToInt(char* s) {
     char *p = s;
     int result = 0;
-    int p_val = romanChToInt(*p);
 
-    while (*p != 0) {
-        if (p_val <= 100 && *(p+1)) {
-            // Check next character to determine whether require minus
-            int next_p_val = romanChToInt(*(p+1));
+    int prev_val = 32767;
+    int curr_val = -1;
 
-            if (p_val < next_p_val) {
-                result += (next_p_val - p_val);
-                p++;
-            } else {
-                if (next_p_val <= 100) {
-                    result += p_val;
-                    p_val = next_p_val;
-                    p++;
-                    continue;
-                } else {
-                    result += (p_val + next_p_val);
-                    p++;
-                }
-            }
+    while(*p != 0) {
+        curr_val = romanChToInt(*p);
+        if (curr_val > prev_val) {
+            result += (curr_val - prev_val * 2);
         } else {
-            result += p_val;
+            result += curr_val;
         }
-
+        prev_val = curr_val;
         p++;
-        p_val = romanChToInt(*p);
     }
 
     return result;

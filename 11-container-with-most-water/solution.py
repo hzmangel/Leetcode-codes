@@ -15,13 +15,15 @@ class Solution(object):
         h = data_len - 1
 
         while(l < h):
-            new_area = min(height[l], height[h]) * (h - l)
-            if new_area > rslt:
-                rslt = new_area
             if (height[l] <= height[h]):
+                new_area = height[l] * (h - l)
                 l += 1
             else:
+                new_area = height[h] * (h - l)
                 h -= 1
+
+            if new_area > rslt:
+                rslt = new_area
 
         return rslt
 

@@ -14,14 +14,11 @@ class Solution(object):
         rslt = strs[0]
 
         for s in strs[1:]:
-            tmp_rslt = []
             str_len = len(s)
             for idx, c in enumerate(rslt):
                 if idx >= str_len or s[idx] != c:
+                    rslt = rslt[:idx]
                     break
-                tmp_rslt.append(c)
-
-            rslt = tmp_rslt
 
         return ''.join(rslt)
 

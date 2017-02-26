@@ -20,8 +20,8 @@ class Solution(object):
                     rslt = rslt[:idx]
                     break
 
-        return ''.join(rslt)
+        return rslt
 
 
 foo = Solution()
-print(foo.longestCommonPrefix(['ab', 'a']))
+print(foo.longestCommonPrefix(['abababa', 'abababc']))

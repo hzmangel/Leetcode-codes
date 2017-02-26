@@ -1,5 +1,5 @@
 class Solution(object):
-    @profile
+    # @profile
     def threeSum(self, nums):
         """
         :type nums: List[int]
@@ -11,7 +11,8 @@ class Solution(object):
 
         rslt = []
         for idx in range(arr_len - 2):
-            if idx > 0 and nums[idx] == nums[idx - 1]:
+            num = nums[idx]
+            if idx > 0 and num == nums[idx - 1]:
                 continue
 
             target_val = 0 - num
@@ -21,7 +22,8 @@ class Solution(object):
                 if l_idx == idx or r_idx == idx:
                     break
 
-                if nums[l_idx] + nums[r_idx] == target_val:
+                tmp_sum = nums[l_idx] + nums[r_idx]
+                if tmp_sum == target_val:
                     rslt.append(tuple(sorted([nums[l_idx], nums[r_idx], num])))
                     curr_l = nums[l_idx]
                     curr_r = nums[r_idx]
@@ -32,9 +34,9 @@ class Solution(object):
                     while((r_idx > 0) and (nums[r_idx] == curr_r)):
                         r_idx -= 1
 
-                elif nums[l_idx] + nums[r_idx] < target_val:
+                elif tmp_sum < target_val:
                     l_idx += 1
-                elif nums[l_idx] + nums[r_idx] > target_val:
+                elif tmp_sum > target_val:
                     r_idx -= 1
 
         return rslt

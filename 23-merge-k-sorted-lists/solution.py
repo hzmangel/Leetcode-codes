@@ -33,21 +33,23 @@ class Solution(object):
         heads = [l for l in lists if l]
 
         while(heads):
-            min_val = heads[0].val
+            min_node = heads[0]
+            min_val = min_node.val
             min_idx = 0
 
             for idx, head_node in enumerate(heads[1:]):
                 if head_node.val < min_val:
+                    min_node = head_node
                     min_val = head_node.val
                     min_idx = idx + 1
 
             # print('-' * 20)
             # print(min_idx, min_val, heads[min_idx].val)
             if rslt_head:
-                rslt_cursor.next = ListNode(min_val)
+                rslt_cursor.next = min_node
                 rslt_cursor = rslt_cursor.next
             else:
-                rslt_head = ListNode(min_val)
+                rslt_head = min_node
                 rslt_cursor = rslt_head
 
             heads[min_idx] = heads[min_idx].next

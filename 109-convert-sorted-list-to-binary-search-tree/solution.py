@@ -51,7 +51,6 @@ class Solution(object):
     def insertNode(self, head, tail):
         if head == tail:
             return
-
         slow = head
         fast = head
 
@@ -62,12 +61,15 @@ class Solution(object):
         # After loop, slow should be middle of the list, then should be the root
         # of the tree
         root_node = TreeNode(slow.val)
-        root_node.left = self.insertNode(head, slow)
-        root_node.right = self.insertNode(slow.next, tail)
+        if head != slow:
+            root_node.left = self.insertNode(head, slow)
+        if slow.next != tail:
+            root_node.right = self.insertNode(slow.next, tail)
         return root_node
 
 
 foo = Solution()
+foo.sortedListToBST(None)
 test_set = ListNode.buildFromArray(range(10))
 print(foo.sortedListToBST(test_set).pre_order())
 

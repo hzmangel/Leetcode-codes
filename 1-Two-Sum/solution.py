@@ -5,10 +5,14 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        nums_count = len(nums)
+        rslt = {}
 
-        for idx1, v1 in enumerate(nums):
-            to_be_found = target - v1
-            for idx2, v2 in enumerate(nums[idx1+1:]):
-                if v2 == to_be_found:
-                    return [idx1, idx2+idx1+1]
+        for i, num in enumerate(nums):
+            if num in rslt:
+                return (i, rslt[num])
+            else:
+                rslt[target - num] = i
+
+
+foo = Solution()
+print(foo.twoSum([2, 7, 11, 15], 9))

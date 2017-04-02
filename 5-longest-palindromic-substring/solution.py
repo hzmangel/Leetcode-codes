@@ -14,9 +14,9 @@ class Solution(object):
                 max_len += 2
                 offset += 1
             else:
-                return max_len, s[l_end_idx-offset+1:r_start_idx+offset]
+                return max_len, s[l_end_idx - offset + 1:r_start_idx + offset]
 
-        return max_len, s[l_end_idx-offset+1:r_start_idx+offset]
+        return max_len, s[l_end_idx - offset + 1:r_start_idx + offset]
 
     def longestPalindrome(self, s):
         """
@@ -32,17 +32,22 @@ class Solution(object):
         rslt = ''
 
         for idx, c in enumerate(s):
-            tmp_max_len, tmp_rslt = self.findPalindrome(s, idx-1, idx+1)
+            same_ch_offset = 1
+            while idx + same_ch_offset < str_len and s[idx] == s[idx + same_ch_offset]:
+                same_ch_offset += 1
+
+            tmp_max_len, tmp_rslt = self.findPalindrome(s, idx - 1, idx + same_ch_offset)
             if tmp_max_len > max_len:
                 max_len = tmp_max_len
                 rslt = tmp_rslt
 
-            tmp_max_len, tmp_rslt = self.findPalindrome(s, idx, idx+1)
+            tmp_max_len, tmp_rslt = self.findPalindrome(s, idx, idx + 1)
             if tmp_max_len > max_len:
                 max_len = tmp_max_len
                 rslt = tmp_rslt
 
         return rslt
+
 
 foo = Solution()
 print(foo.longestPalindrome('b') == 'b')
@@ -52,6 +57,7 @@ print(foo.longestPalindrome('abccbe') == 'bccb')
 print(foo.longestPalindrome('abcabcba') == 'abcba')
 print(foo.longestPalindrome('abcdcbaabc') == 'abcdcba')
 print(foo.longestPalindrome('aabbccbbaa') == 'aabbccbbaa')
-print(foo.longestPalindrome("abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa") == "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa")
+print(foo.longestPalindrome("abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa")
+      == "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa")
 
 print(timeit.timeit('foo.longestPalindrome("abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa")', setup="from __main__ import Solution; foo = Solution()", number=50))

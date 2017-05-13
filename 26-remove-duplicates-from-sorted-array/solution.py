@@ -14,10 +14,10 @@ class Solution(object):
 
         last_val_idx = 0  # Index for last value
 
-        for num in nums[1:]:
-            if nums[last_val_idx] != num:
+        for i in range(1, array_len):
+            if nums[last_val_idx] != nums[i]:
                 last_val_idx += 1
-                nums[last_val_idx] = num
+                nums[last_val_idx] = nums[i]
 
         # last_val_idx is from 0, so add 1 offset for length
         return last_val_idx + 1
